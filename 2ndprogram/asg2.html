@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<link rel="STYLESHEET" href="../css/classpage1.css" type="text/css" />
+
+<title>COSC 2331 Assignment #2
+</title>
+</head>
+<body>
+
+<h3>        COSC 2331 Assignment #2 </h3>
+<b> Due Date: Friday, September 11, 2009 by 5pm
+</b>
+<p>
+Your assignment is to write a NASM program that prompts the user
+to enter a string of up to 70 chars.  It should echo the original
+string back to the user, then capitalize all letters, echo it back,
+then lower case all letters and echo it back.
+
+Be sure your program outputs appropriate messages, spaces, 
+ and newline chars as the output is produced.
+You will write your entire program in assembly language so you will
+ assemble it, link it, and then execute it.<p>
+<b> Example for creating this program and running it</b>
+<br />
+<ol>
+<li>
+Create prog2.asm using your editor: &nbsp&nbsp
+<span class="blue"> emacs prog2.asm </span>
+<li>
+Assemble prog2.asm using nasm: &nbsp&nbsp 
+<span class="blue"> nasm -f elf prog2.asm </span>
+<li>
+Link your prog2.o: &nbsp&nbsp
+<span class="blue"> ld -m elf_i386 prog2.o </span>
+<li>
+Execute your program:  &nbsp&nbsp
+<span class="blue"> ./a.out </span>
+</ol>
+<p>
+
+<a href="./assemblyInstructions.html"> Help with Nasm </a>.
+
+<hr />
+<br/>
+
+<b>Hand in:  </b>
+<ol>
+<li>Your  assembly language source code in a listing format and a 
+    <a href="../help/scripthelp.html"> script file </a>
+    of the execution of your program run with a few different
+inputs so that it is clear that it works correctly.
+</li>
+<li> Cover sheet with your name, assignment number. 
+</li>   
+  
+</ol>
+
+<br />
+<hr />
+<p class="footer">
+
+    Last revised: &nbsp;&nbsp;
+ <script type="text/javascript">                                                                      
+     document.write(document.lastModified);
+ </script>         
+</p>
+</body>
+</html>
+

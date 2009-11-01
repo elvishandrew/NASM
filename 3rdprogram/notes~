@@ -1,0 +1,55 @@
+reading a string that is an int
+convert that string to a 2's complement integer
+(add 1 to the number maybe)
+convert that number back to a string
+
+
+test cases 
+-1 + 1 = 0
+-1000  = -999
+-345	= -353
+
+mov exi, 10
+set ebx to 0
+
+
+algorithm string to int
+value = 0(use a register)
+(stuff value into eax)
+(dont have anything in edx that you care about)
+loop thru each char of the string
+for each char convert it to a number
+	convert it to a number(subtract 30h from a char)
+
+multiply value by 10
+add digit to value
+end for
+
+push and pop are either 2 byte or 4 byte instructions
+
+push edx;
+pop edx;
+
+
+
+section .bss
+input resb 15
+result resb 15
+;test the input string for a + or a - sign
+mov esi, input
+mov ecx, [input_len]
+xor edx, edx; assume num is positive, so edx=0=positive
+mov bl, [esi]
+cmp bl, '+'
+jne skip_plus
+inc esi
+dec ecx
+jmp done_sign
+
+skip_plus: cmp bl, '-'
+	jmp ne done_sign
+	inc esi
+	dec ecx ; 1 less char to look at
+	inc edx ; means negative
+
+done_sign; push edx ;save our negative flag

@@ -1,0 +1,44 @@
+; File: prog3.asm
+; Author: Andrew Plunk
+; Description: Is the main method, calls subroutines to ask the user for a list of 10 ints,
+	;converts them to the screen, prints the largest number in the list, the smallest number in the list, and
+	;the rounded average of the numbers of the list.
+; 2009-10-05
+
+extern writeString, readString, newLine, string_to_int
+
+global _start ;flag those routines that should be found outside
+		;of this file
+section .bss
+;;;;;;;;;;;;;;;
+list resb 40	;create an array
+
+
+section .data
+prompt db "Please enter a list of up to 10 numbers, if you wish to enter less than 10 numbers type an 'x' before you press enter."
+prompt_len equ $ - prompt ;save the length of prompt
+
+section .text
+
+_start:
+
+;setup write string with the prompt message
+write_string_prompt:
+	push dword prompt_len ;setup the second arguement
+	push dword prompt ;setup the first argument
+	call writeString
+
+list_read_string:
+	
+
+
+
+
+quit:
+	;exit the program
+	mov ebx, 0	;stop the interrupt
+	mov eax, 1	
+	int 80h 	;call kernel to perform the interrupt (stop)
+
+
+

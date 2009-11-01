@@ -1,0 +1,15 @@
+moov esi, mystring
+mov ecx, [my_string_len]
+bl='H'
+esi=1000
+edi=2000
+
+ecx=5
+
+top_loop: mov bl, [esi]
+	cmp  bl, 'A'
+	jb skip
+	cmp bl, 'Z'
+	ja skip
+	add bl, 32
+iskip: mov [edi], bl;
