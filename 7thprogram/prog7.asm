@@ -73,6 +73,8 @@ call newLine
 	push rings
 	call writeString
 
+call newLine
+
 	push towerC
 	push towerB
 	push towerA
@@ -122,7 +124,7 @@ wait:
 
 	popad
 	pop ebp
-	ret 16
+	ret 12
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;end of move ring
 
 

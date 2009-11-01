@@ -53,7 +53,7 @@ else:
 	call move_ring
 
 ;call hanoi
-	;dec ecx		;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	dec ecx		;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	push edx	;dst address
 	push esi	;src address
 	push ebx	;mid address
@@ -64,7 +64,7 @@ else:
 done:
 	popad
 	pop ebp
-	ret 20
+	ret 16
 
  		
 
