@@ -4,11 +4,22 @@
 	;using move_ring
 ; 2009-10-30
 
-global hanoi
-extern writeString, stringToInt, move_ring
+global hanoi, move_ring
+extern writeString, stringToInt, intToString, newLine
 section .bss
+	rings resb 16
+	ringLen resd 1
+	ringstor resb 16
+
 
 section .data
+	mvMsg db "Move ring # "
+	mv_len equ $ - mvMsg
+	srcMsg db " from "
+	src_len equ $ - srcMsg
+	dstMsg db " to "
+	dst_len equ $ - dstMsg
+
 
 
 section .text
@@ -53,7 +64,7 @@ else:
 	call move_ring
 
 ;call hanoi
-	dec ecx		;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	;dec ecx		;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	push edx	;dst address
 	push esi	;src address
 	push ebx	;mid address
@@ -67,6 +78,51 @@ done:
 	ret 16
 
  		
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;move_ring
+;void move_ring(ring#, src addr, dst addr)
+;prints "move ring # from src addr to dst addr"
+move_ring:
+	push ebp
+	mov ebp, esp
+	pushad
+
+	mov edx, [ebp + 16]	;dst addr
+	mov esi, [ebp + 12]	;src addr
+	mov ecx, [ebp + 8]	;ring#
+
+
+wait:
+	push ecx
+	push ringstor
+	call intToString
+
+	push eax
+	push ringstor
+	call writeString
+	
+	push src_len
+	push srcMsg
+	call writeString
+
+	push dword 7
+	push esi
+	call writeString
+
+	push dst_len
+	push dstMsg
+	call writeString
+
+	push dword 7
+	push edx
+	call writeString
+
+	call newLine
+
+	popad
+	pop ebp
+	ret 12
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;end of move ring
+
 
 
 
