@@ -48,6 +48,7 @@ hanoi:
 	push esi
 	push ecx
 	call move_ring
+	jmp done	;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 else:
 ;call hanoi
 	dec ecx		;n = n -1
