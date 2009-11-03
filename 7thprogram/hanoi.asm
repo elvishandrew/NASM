@@ -59,13 +59,14 @@ else:
 	call hanoi
 
 ;call move_ring
+	inc ecx
 	push edx	;dst address
 	push esi	;src address
 	push ecx
 	call move_ring
 
 ;call hanoi
-	;dec ecx		;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	dec ecx		;check!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	push edx	;dst address
 	push esi	;src address
 	push ebx	;mid address
