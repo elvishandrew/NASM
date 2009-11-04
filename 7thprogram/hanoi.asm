@@ -1,7 +1,7 @@
 ; File: hanoi.asm
 ; Author: Andrew Plunk
 ; Description: solves the towers  of hanoi problem
-	;using move_ring
+	;using move_ring and hanoi
 ; 2009-10-30
 
 global hanoi, move_ring
