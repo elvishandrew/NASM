@@ -1,0 +1,77 @@
+ask to divide some value by another vallue, 32 bit divide ie total in eax
+64 bit dividend
+
+cdq or check if eax is < 0
+cwd -> dx:ax <= ax
+cbw => ax <= al
+cdq => adx:eax <= eax
+
+
+float:
+-scientific notation
+IEEE scheme
+
+32bit scheme
+convert -64 to binary
+
+1000001.
+	1/2 1/4 1/8
+
+
+
+
+
+
+1. convert to binary
+-for remainder multiply by two untill you start to see a pattern
+2. normalize ex 100001.1010100101 ===> 1.000011010100
+3. add 127 to exponent
+
+then write sign bit,  exponent,
+
+
+
+;write subroutine str cmp that recieves 2 null-terminated string addresses
+;int strcmp(addr str1, addr str2)
+strcmp:
+	push ebp
+	mov ebp, esp
+	;push any rgisters used
+	mov esi, [ebp + 8] ;esi = addr str1
+	mov edi, [ebp + 12]
+
+next_char:
+	mov bl, [esi] ;next char in str1
+	mov bh, [edi] ;next char in str2
+
+	test bl, bl
+	je end_str1
+	test bh, bh
+	je end_str2
+
+	cmp bl, bh
+	jg st1_bigger
+	jl str1_smaller
+	inc esi
+	inc edi
+	jmp next_char
+
+str1_bigger:
+	mov eax, 1
+	jmp done
+
+str1_smaller:
+	mov eax, -1
+	jmp done
+
+end_of_str1:
+	test bh, bh
+	jnz str1_smaller
+	mov eax, 0
+	jmp done
+
+end_of_str2:
+	test bl, bl
+	jnz str1_bigger
+	mov eax, 0
+done

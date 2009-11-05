@@ -1,0 +1,96 @@
+assume a string contains stringLen chars, write code to count # of letter e in the string, put count in eax.
+(case insensitive)
+
+(differentiate constants "equ 5" from variables
+
+var string
+stringLen
+
+mov esi, string ;get address of string
+mov, ecx, [stringLen] ;get count of chars into ecx
+xor eax, eax ;set count to 0 !!!!!!!!!!!!do this in program
+
+
+test ecx, ecx ;
+jz done
+top_loop: ;subtract one from ecx, if not zero loop otherwise fall out
+	mov bl, [esi] ;get the first char into bl
+	cmp bl, 'e'
+	je inc_e_count:
+	cmp bl, 'E'
+	je inc_e_count:
+	inc esi;
+	loop top_loop
+
+inc_e_count:
+	inc eax
+	loop top_loop	
+	jmp done
+
+done:
+
+
+NULL TERMINATED STRINGS
+null-terminated strings
+a string that ends with a null character
+it is the character code 0, BYTE ZERO
+
+;write the code that would count numm of chars in a null terminated string;
+;the string is stored at address  my string
+;store count into eax
+section .data
+	school db 'SEU', 0     ;creates a null terminated string
+
+	mov edi, myString  ;gets the ADDRESS mystring iinto edi	
+	xor eax, eax ;count is zero	
+
+top_loop:	
+	mov bl, [edi] ;get char of string
+	test bl, bl ;is it the null
+	je done_count
+	inc eax ;count a char
+	inc edi ;mov to next  char
+	jmp top_loop
+
+
+
+done_count:
+
+
+
+if(k > 10)
+	a=5
+else if (k >5)
+	a=3
+else 
+	a = 0
+
+mov ebx, [k]
+cmp ebx, 10
+jle next_test
+mov eax, 5 ; a = 5
+jmp last
+
+next_test:
+	cmp ebx, 5
+	jle last
+	mov eax, 3
+	jmp done_if
+	xor eax, eax ;makes eax 0
+
+last:
+	mov [a], eax
+
+
+
+
+
+
+
+
+
+
+
+
+
+

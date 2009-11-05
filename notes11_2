@@ -1,0 +1,79 @@
+ File: notes11_2
+ Author: Andrew Plunk
+ Description: 
+ 2009-11-02
+
+
+
+ SHL
+ SHR -bring in zero
+
+
+ shr eax, 5
+
+
+ sar
+ sal -bring in sign bit on sar
+
+
+ ror src,#bits
+ rol src, #bits
+
+0000000000001001100010100011
+1000000000000000000000000000 -mask
+
+and is correct operation, but use test so that we don't change the operation
+
+
+
+ ;void print Binary (int valueToPrint)
+printBinary:	push ebp
+		mov ebp, esp
+		sub esp, 8 ;allocate two four byte values, one for the digit 1 one for 0
+		pushad
+
+		mov [ebp - 4], byte '0'
+		mov [ebp - 8], byte '1'
+		mov ebx, 80000000h
+		mov ecx, 32 ;number of values to print
+		mov eax,  [ebp + 8]	;get value into eax
+
+		lea edi, [ebp - 8]	;takes the address of ebp -8 into edi
+		lea esi, [ebp - 4]	;takes the address of ebp -4 into esi
+top_loop:
+		test eax, ebx
+		jz print_zero
+
+		push dword 1
+		push edi
+		call writeString
+		jmp incLoop
+
+print_zero:
+		push dword 1
+		push esi
+		call writeString
+
+incLoop:
+		shr ebx, 1	;shift mask over 1 to the right
+		loop top_loop
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+FLOATING POINT
+
+assignment 7
+
+create some floating point values in NASM
+
+in assembly you have a different set of instructions for
+floating poing arithmetic and comparasins
+
+
+exponent == FF && fraction ==0 => NAN
+exponent == FF && fraction != 0 => infinity
+exponent == 0 && fraction == 0  => zero
+exponent == 0 && fraction != 0 => denormalized value
+
+;;;;;;;;;
+create a floating point value

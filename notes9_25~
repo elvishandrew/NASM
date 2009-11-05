@@ -1,0 +1,69 @@
+ File: notes9_25
+ Author: Me
+ Description: 
+ 2009-10-05
+
+
+
+subprograms
+
+callingConvention-
+y= function (x, z);
+push z
+push x
+call function (push return address)
+put answer in register - eax
+
+mov [y], eax
+
+
+subroutines are expected to save aand restore registers, all registers that they use.
+
+;void writeString(address of string, string length )
+
+section .data
+	prompt db "Enter integer";
+	promptLen equ $-prompt
+
+section .text
+
+_start: push dword promptLen
+	push dword prompt
+	call writeString
+
+
+writeString:
+	push ebp ; save previous ebp 
+	mov  ebp, esp ; establisthing our base pointer
+	push eax
+	push ebx
+	push ecx
+	push edx	
+
+;write string, body of fn
+mov edx, [ebp + 12] ; length of string
+mov ecx, [ebp + 8] ; prompt address
+mov ebx, 1
+mov eax, 4
+int 80h
+
+	pop edx
+	pop ecx
+	pop ebx
+	pop eax
+	pop ebp ;returns calling program's ebp
+	ret 8
+
+
+SIGNATURE FOR READ STRING
+; int readString( addressofString, int maxchars)
+;reads up to max chars, from stdin 
+;returns num chars read
+
+
+
+put subroutines in their own file subs.asm all in section.text
+put global writeString, readString,
+
+main.asm
+	extern writeString, readString

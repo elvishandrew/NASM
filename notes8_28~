@@ -1,0 +1,40 @@
+date - memory and symbols
+
+memory locations are called symbols, they are names you choose for data.
+symbols- named values (use equ)
+
+reserve space
+----------
+resb- reserve byte
+resw- word
+resd-double word
+resq- quad word
+
+when you do input and output in nasm you only can input and output strings of characters.
+
+interrupt 80h
+int 0x80 or int 80h
+80h-both lets you input a string or output a string to tell nasm what interrupt to execute.
+
+global _start is a dirrective, which makes start avilable for all linked files
+_start: is where start begins
+
+general purpose registers-these are in processor(hardware registers). they are used by the interrupt 80h
+eax-extended, 32bit registers
+ebx
+ecx
+edx
+
+
+edx= length of string
+ecx= address of string to output
+ebx= 1(for stdout)
+eax=4(value for innerupt for output)
+
+b1 is a label, for debugging so you could stop at b1, loops and ifstatements
+
+dec-decrement
+
+
+
+

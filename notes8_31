@@ -1,0 +1,63 @@
+8086;8088 - intel based 16bit ewfiarwea
+	CPU REGISTERS
+	------------
+	AX, BX, CX,DX,SI,DI (si - source index di-destination index) BP(base pointer points to the bottom of stack),
+	SP(stack pointer points to top of stack) SS, DS, ES, IP, FLAGS
+
+80386- extended registers 32 bit registers
+	 EAX, EBX, ECX, EDX, EXI, EDI, EBP, ESP, EIP
+	access to 4gb of ram
+	32 bit registers = 2^32 addresses = 4 gigs of ram
+
+80486, pentium mmx
+
+general purpose registers
+-----------------------
+AX-ah(a registers higher order register) al(lower register) portion
+BX- bh bl
+CX-ch cl
+DX-dh dl
+
+move al, 5 ( al is opperand, 5 is immediate operand);
+
+
+EIP-instruction pointer
+	Register
+________________________
+fetch-get instruction
+update- move IP to next instruction
+decode- decide what to do
+execute-do that
+
+
+increment - inc
+decrement - dec
+
+inc al
+inc ax
+dec dx
+dec dl
+dec dh
+XXXXXXdec [num1]-wrong
+dec byte [num1] - right
+
+int 80h -destroys what is in eax ebx ecx edx
+
+add destination, src
+
+add ax, 55 ; ax = ax + 55
+sub cl, 12 ; cl = cl - 12
+
+ax - register operand
+[num1] - memory operand
+5- immediate operand
+NO memory to memory, XXXXX add[num1], byte[num2]
+
+
+imul- signed
+mul- unsigned
+
+mul cx; dx:ax = ax * cx ( ax is the src, dx is where answer is as well as ax)
+imul cx ; dx:ax= ax * cx
+
+

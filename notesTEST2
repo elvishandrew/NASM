@@ -1,0 +1,87 @@
+ File: notesTEST2
+ Author: Andrew Plunk
+ Description: 	
+ 2009-10-21
+
+ ;void strCpy(addr str1, addr str2, int length)
+strCopy:
+	 mov ebp
+	 mov ebp, esp
+	 pushad ;all double cuz void
+	 mov ecx, [ebp + 16]
+	 test ecx, ecx
+	 jz done ;no length to copy
+
+	 mov edi [ebp + 8] ;addr str1
+	 mov esi, [ebp + 12] ;addr str2
+
+top_loop:
+	mov al, [edi] ;grabs one char from string 1
+	mov [esi], al
+	inc esi
+	inc edi
+	loop top_loop
+
+done:
+	 popad
+	 popebp
+	 ret 12
+;end strCopy:	
+
+
+j- ;int countEven(array addr of ints, # of values in array)
+
+countEven:
+	push ebp
+	mov ebp, esp
+	push ecx
+	push esi
+	push edx
+	push ebx
+	push edi
+
+	mov ecx, [ebp + 12]
+	test ecx, ecx
+	jz zero_elements
+	mov esi, [ebp + 8]
+	xor edi, edi
+	mov eax, [edi]
+
+arr_loop:
+	mov eax, [edi] ;eax is 4 bytes which is the size of each array element
+	cdq
+	idivv ebx ; edx:eax /ebx q=eax r =edx
+	test edx, edx
+	jnz next_element
+	inc esi ;inc counter
+next_element
+	add edi, 4
+	loop arr_loop
+
+mov eax, esi
+jmp done
+
+zero_elements: xor eax,  eax
+
+	pop ebx
+	pop edx
+	pop esi
+	pop ecx
+	pop ebp
+	ret 8
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+second way using a mask
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+mov ebx, 1 ;mask of 00000001
+loop:
+mov eax, [edi]
+test eax, ebx ;logical and
+jnz next_element
+inc esi
+next_element:
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+

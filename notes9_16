@@ -1,0 +1,74 @@
+convert decimal to 
+-492 in 10 bits
+_ _ _ _ _ _ _ _ _ _
+s 256 128 64 32 16 8 4 2 1
+
+492 - 256 = 136
+136-128 =8
+8-8=0
+
+2^10 = 1024 or +-512 if signed
+
+0110001000
+that is positive 492 to make it negative flip and add 1
+1001110111
+	1
+--------------
+1001111000
+
+overflow happens when you add a negative and a negative and get a positive.
+
+4D3F
+6189  +
+-----
+
+10110110
+
+
+mov cl, AEh                 be  able to walk through what this does
+mov, ax, BC30h
+mov dx, B3Ef
+add al, cl
+mov ch, ah
+
+assume my_string has been populated with a string of chars of len my_len
+store into eax the number of whitespace chars in my_string
+(space newline tab)
+
+space =' '
+newline='\n'
+tab='\t'
+
+mov ecx, [my_len]; char count
+mov edi, my_string ;address of string
+xor eax, eax ;eax = 0
+test ecx, ecx ;test does a bitwise check against to itself to see if it is 0
+je done; check if any chars in string
+
+top_of_loop:
+	mov bl, [edi]; grabs a char into bl
+	cpm bl, ' ';
+	jne next_test;
+	inc eax;
+	jmp bottom_loop
+next_test: cmp bl, '\n'
+	jne next_test_2;
+	inc eax
+	jmp bottom_loop
+
+next_test2:cmp bl, '\t';
+	jne bottom_loop
+	inc eax
+
+bottom_loop:
+	inc edi
+	loop top_loop ;loop dec ecx
+
+
+copy str1 into str2
+str1 has str1_leen chars
+
+
+
+
+

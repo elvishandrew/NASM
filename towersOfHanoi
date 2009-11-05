@@ -1,0 +1,104 @@
+3 towers
+mov n disks
+from src to dst
+using mid as a help
+location
+
+
+high level//////
+
+void hanoi(# rings, src, mid, dst)
+{
+	if(n < = 0){
+		return;
+	}
+	if(n == 1){
+		print "mov ring n from src to dst";
+	}else{
+		hanoi(n -1, src, dst, mid)
+		print "move ring n from src to dst";
+		hanoi( n-1, mid src, dst)
+		}
+		}
+
+;int fib(int n)
+;returns the nth term of the fibonacci sequence
+
+fib:
+	push ebp
+	mov ebp, esp
+	push ebx
+	push ecx
+	push edx
+
+	mov ebx, [ebp + 8] ;ebx = n
+	cmp ebx, 1
+	je n_is_one
+	cmp ebx, 2
+	je n_is_two
+	cmp ebx, 1
+	jl error
+	
+do_sequence:
+	dec ebx ;ebx = n-1
+
+	push ebx
+	call fib
+	
+	mov ecx, eax ;save fib of n -1 in ecx
+	dec ebx; ebx = n-1
+	push ebx
+	call fib
+
+	add eax, ecx
+	jmp done
+
+error:	mov eax, -1	
+	jmp done
+
+n_is_one:xor eax, eax
+	jmp done
+
+n_is_two:
+	mov eax, 1
+
+done:	pop edx
+	pop ecx
+	pop ebx
+	pop ebp
+	ret 4
+
+
+******************************************
+triangle(n,r) = 0  if n < r or r < 0
+		= 1 if n == r or r == 0
+		= triangle (n -1, r) + triangle (n-1, r-1)
+			if (n > r or r > 0)
+
+quicksort
+	36, 45, 18, 26, 9, 52
+
+quicksort's main method
+-----------------------
+
+
+;public void quicksort(int list[], int low, int high)
+
+;quicksort (list, 0, 5)
+if(low < high){ ;we have at least 2 to sort
+
+int pivitlocation = partition(list, low, high)
+
+quicksort(list, low, pivot -1)
+quicksort (list, pivot + 1, high)
+}
+
+ch 7 - bit manipulation
+
+bitwise operators
+xor- (toggle opperator) - on and off
+	-used to clear registers
+	xor eax, eax
+	use a mask to toggle 1 or more bits
+
+mask- bits on where something happens, and off where they don't

@@ -1,0 +1,102 @@
+1: read a list of integers store them into an array. Keep track of how many u got. (no more than 10). Store them into an array.
+(use  a sentinel value to stop reading x)
+2: print that list to the screen w/ a message.
+3: find the largest value in the list, and print it. with a message
+4: find the smallest value in the list, print it
+5: find the average (rounded off) and print it.
+
+
+Seperate this into 2 files, subroutines and main method
+
+main4.asm
+---------
+
+
+
+
+HOW TO DO # 1 ;this all goes in main4.asm
+-------------
+extern readList
+
+section .bss
+list resd 10
+count resd 1
+max equ 10 
+
+section .text
+_start:
+push dword max
+push dword list ;this is the address
+call readList
+mov [count], eax ;get return value, store out to count
+
+
+
+mySubs.asm
+----------
+global readList ;makes it where everyone can use it
+section .text
+
+; int readlist(address of array, int max values to read)
+;method reads up to max values from stdin, usr types  'x' to quit
+;returns number of  values read. # of values <= max values.
+
+set count to 0
+set up starting address of array
+while(count < max values)
+prompt user for a value
+read value
+if value is x
+stop ;jmp to end
+convert value to int
+store int into array a, and move to next array address
+increment count
+end while
+
+end_of_read: make sure count is in eax
+resturn set up
+
+
+;mysubs .asm
+section .data
+prompt1 db "Enter an integer, x to quit:"
+prompt1_len equ $ - prompt1
+
+section .bss
+input resb 20
+
+readList:
+	push ebp ;save base pointer  ;;;;;do these every freeken sub you write;;;;;;;
+	mov ebp, esp    ;;;;;do these every freeken sub you write;;;;;;;
+	;;;;;;save the calling programs registers
+	push ebx,
+	push ecx
+	push edx
+	push exi
+	push edi
+	;;;;;dont push eax because its where the answer goes
+	
+	xor ecx, ecx ;sets eax to 0
+	mov edi, [ebp + 8] ;get the first paramater	
+	mov edx, [ebp + 12] ; max in ebx
+
+	cmp eax, ebx ;is count < max
+	jge  done_while_loop
+
+;;;;write the prompt
+	push dword prompt1len
+	push dword prompt1
+	call writeString
+
+	push dword 20
+	push dword input
+	call readString
+
+	cmp [input], byte 'X'
+	je done_while_loop
+	cmp [input], byte 'x'
+	je done_while_loop
+
+
+
+

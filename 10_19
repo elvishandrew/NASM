@@ -1,0 +1,36 @@
+a recursvie function is a function that calls itself
+to  solve a subset of the origional problem
+It must have a base case
+
+;int fact(int n)
+
+fact:
+	push ebp
+	mov ebp, esp
+	push ebx
+	push ecx
+	push edx
+	mov ebx, [ebp];get n
+	test ebx, ebx ;is n < 0
+	jl error ;n is negative
+	je return_1 ;n == 0
+
+	mov ecx, ebx
+	dec ebx
+	push ebx
+	call fact
+	mul ecx
+	jmp done_fact
+
+return_1: mov eax, 1
+	jmp done_fact
+error: mov eax, -1
+
+done_fact: 
+	pop edx
+	pop ecx
+	pop ebx
+	pop ebp
+	ret 4
+	
+

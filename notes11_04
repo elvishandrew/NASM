@@ -1,0 +1,49 @@
+ File: notes11_04
+ Author: Andrew Plunk
+ Description: 
+ 2009-11-04
+
+
+
+ IEEE floating point format
+ S	8bit exponent	fraction with hidden bit
+
+
+ for lab # 7 
+ create an array of floating point values
+
+ 1. print the value in binary
+ 2. state whether or not the number is a special case float number
+ 	denormalized?
+	zero?
+	Nan?
+	Infinity?
+
+	test the exponent is it 		  ff or 00.
+	NAN fraction is zero, not zero infinity<----	---> fraction is not zero denormalized or zero
+
+Isolate exponent?
+	shift it 23 bits to the right and check byte for exponent !!!!!!!!
+
+Isolate mantissa?
+	mask all zeros and 23 1's
+	test against its self to check for special cases
+
+3. count the number of 1's on in the stored mantissa
+		create mask 000000000001
+			test with binary number, then shift left afterwards
+
+	mov ebx, 1 ;mask
+	mov eax, [ebp + 8]
+	isolate in eax, the mantissa
+	set ecx to 23
+	sed edx to 0
+	test eax, ebx
+	jz skip_inc
+	inc edx
+	skip_inc shl ebx, 1
+
+
+
+
+

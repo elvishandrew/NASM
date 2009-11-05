@@ -1,0 +1,76 @@
+you need to allocate sspace for 10 integers 4 bytes each. spcae for count.
+
+1.read data and store into list(save count)
+2.print list back to screen.
+3.find the largest
+
+
+;int findMax (array address, #values in array)
+findmax: push ebp ;push old base pointer
+	mov ebp, esp
+	push ebx
+	push ecx
+	push edi
+	mov edi, [edp + 8] ;address of array into edi
+	mov ecx, [edp + 12] ;count in ecx
+	mov eax, [edi] ;the first thing edi points to 
+	dec ecx ;bump the count down one
+	test ecx, ecx	;cmp ecx, 0
+	je done_with_findmax
+	add edi, 4
+	
+top_findmax:cmp eax, [edi]
+		jge skip_move
+		mov eax, [edi]
+
+skip_mov:	add edi, 4
+		loop top_findmax
+
+
+	
+done_with_findmax:	pop  edi
+			pop  ecx
+			pop  ebx
+			pop  ebp
+			ret 8 ;return
+
+
+
+
+NEXT ASSINGMENT SORT THE LIST
+-----------------------------
+insertion sort or selection sort
+
+insertion
+--------
+0	1	2	3
+65	78	98	99
+
+
+for(int i = 1; i < n; i++)
+{int k = i;
+	while (k > 0)
+	{if (list [k] < list[[k -1])
+	
+		{temp == list[k]
+	list[k] = list[k - 1]
+	list[k-1] =tmp;
+	k--;}
+	else
+	k=0;
+}
+}
+
+;void insertionSort( array address, int count)
+			of ints
+
+
+insertionSort: push ebp    ;stack frame: local variables can be there 
+		mov ebp, esp
+		sub esp, 4	;local variables to a subroutine are allocated off
+						;of the stack
+		
+;to call insertion sort
+	push dword [count]
+	push dword list
+	call insertionSort	

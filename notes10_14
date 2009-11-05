@@ -1,0 +1,86 @@
+;void insertionSort (addr of array of ints, #elements in array)
+
+insertSort:
+	push ebp
+	mov ebp, esp
+	pushad
+	mov ecx, [ebp + 12] ;get # elements
+	cmp ecx, 1
+	jle done_sort
+	mov edi, [ebp + 8] ;get array addr
+	mov ebx, edi ;save the stopping address for inner
+	dec ecx ;repeat loop n-1 times
+outer: add edi, 4 ;edi is pointing at list[i]
+
+	mov esi, edi ; copy it
+	sub esi, 4 ;esi is list [k -1]
+	mov edx, [edi] ;get list[i] into a register
+
+inner:
+	cmp esi, ebx ;make sure we have not gone back too far
+	jb done_inner 	;for unsigned compairing addresses
+	cmp edx, [esi]	;if(list[k] < list [k -1])
+	jge done_inner
+
+;this is the swap of list[k] and list[k-1]
+	push dword [esi]	;push list[k-1]
+	push dword [esi + 4]	;push list[k]
+	pop dword [esi]
+	pop dword [esi + 4]
+	sub esi, 4
+	jmp inner
+done_inner: loop outer	;go get next element to insert
+
+done_sort: popad
+	pop ebp
+	ret 8
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;selection sort
+for ( i = 0; i < n -1 ; i ++)
+{ int min = i;
+for(k = i + 1 ; k < n ; k ++){
+	if (list [k] < list [min[)
+		min = k;
+		}
+		swap (list[i], list[min])}
+
+		
+;void selectionSort (addr of array ints, #elements in array)
+selectionSort:
+	mov ecx, [ebp + 12] ;get # elements
+	cmp ecx, 1
+	jle done_ss
+	dec ecx ; (n-1)
+	mov edi, [ebp + 8] ;get addr of list[i]
+
+
+outer: 
+	mov esi, edi ; assume smallest  value is at top(i)
+	mov ebx, ecx; i's count
+	mov edx, esi	;list[min] is esi
+inner:
+	add edx, 4 ;list[k]
+	mov eax, [esi]	;list[min] copy because you cannot cmp 2 indirrects
+	cmp [edx], eax	;cmp list[k] list[min]
+	jge skip_min
+
+mov esi, edx ;min = k
+skip_min:
+	dec ebx
+	test ebx, ebx
+	jg inner
+	;;;;;swap list[i], list[min]
+	push dword [esi] ;list[min]
+	push dword [edi] ;list[i]
+	pop dword [esi]
+	pop dword [edi]
+	add edi, 4 ;get next i
+	loop outer
+
+done_ss:
+	popad
+	pop ebp
+	ret 8

@@ -1,0 +1,76 @@
+String to Integer
+if you find a badd char
+jmp to error message, print error message, stop the program
+
+"-462"
+
+"set a flag" use some register and set it to 0 or 1
+ie. edx = 0 ;means it is positive
+if minux sign found
+	edx = 1 ;negative
+save flag onto the stack before we continue processing the string
+
+push edx ......... (later do this ->) pop edx 
+					cmp edx, 1
+					jne Skip_negative
+					neg eax
+
+;now value  in eax
+;add 1 to eax
+;now convert that result 
+;back to a string
+
+
+skip_negative:
+	inc eax
+	;now convert back a string
+
+number  to string of characters
++456 => "456"
+get value into eax
+if value is < 0
+negate eax
+mov edx, 1
+push edx
+
+ }otherwise
+xor edx, edx
+push edx}
+
+; now convert value in eax to digits
+
+set a counter to 0
+check if value is 0 if
+inc counter
+so push dword zero onto the stack
+jmp to done
+otherwise
+
+top: clear out edx for divide !!!!!!!!!!!!!!!!!!!!!!!!!
+divide by 10 ;edx:eax / 10
+quotient = eax
+remainder => edx
+push edx ; remainder
+inc counter
+
+check if eax is 0
+if so
+	jmp to  done
+otherwise jmp to top:
+;;;;counter should be in ecx
+
+done: get address of string answer into edi
+inc edi ; skip one byte for sign
+for i = 0 i < counter i++{
+	pop edx
+	convert to character
+	add 20h to edx
+	mov [edi], dl
+	inc edi
+	}
+;now check on sign of number	
+pop edx
+chcke if edx is 1
+if so put a - sign at front of string
+if not put a '+' at front of string
+

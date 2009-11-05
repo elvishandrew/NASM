@@ -1,0 +1,117 @@
+ File: notes9_30
+ Author: Andrew Plunk
+ Description: 
+ 2009-09-30
+
+pushad #cannot use when you need to return a value
+
+popad
+
+;int readList(address of array, int max values)
+push dword maxvalues
+push dword list   ;some array
+call readList
+
+
+stackframe is kept track of by ebp
+;int readList(addr of array
+readList: push ebp
+mov ebp, esp
+
+xor ecx, ecx ;counter
+mov edi, [ebp + 8] ;get address of array into edi
+mov ebx, [ebp + 12]
+
+top_while: cmp ecx, ebx 	;we are at max values
+jge done_while
+
+;prompt for input
+;read input ;eax is # of chars read
+;check if input is x
+cmp [input], byte 'x'
+je done_while
+
+push eax ;#chars in string
+push dword input
+call String_to_int
+mov [edi], eax ;put it out at array address
+
+add edi,4 ;move to next array index
+inc ecx ;add one to counter
+jmp top_while
+
+done_while: mov eax, ecx ;return value
+;pop in reverse order of how you push them
+pop  edi
+pop esi
+pop edx
+pop ebx
+pop ebp
+ret 8
+
+
+where you call readlist
+push dword maxvalues
+push dword list
+call readlist
+mov [count], eax
+push eax ;count
+push dword list
+call printList ;void printList
+
+
+
+
+---------------------------------
+int to string : string to int
+
+;int stringToInt(addressofstring, #chars in string)
+stringToInt: push ebp
+mov ebp, esp
+;push ebx -> esi
+mov ecx, [ebp + 12] ;get length of string
+mov edi, [ebp + 8] ;
+
+cmp [edi], byte '-' ;compare what edi points to to -
+jne skip_negate
+mov edx, 1; negative flag in edx=1
+jmp done_with_sign
+inc edi
+dec ecx ;one less character
+jmp done_with_sign
+
+Skip_neg:
+	cmp [edi], byte '+'
+	jne skip_plus
+	inc edi
+	dec ecx
+	
+skip_plus: xor edx, edx ;set edx  = 0
+
+done_with_sign:
+	xor eax, eax ;acc = 0
+	mov ebx, 10 ;set multiplier
+	push edx ;save sign
+top_of_loop:
+	mov dl, [edi]
+	cmp dl, '0'
+	jb error
+	cmp dl, '9'
+	ja error
+	sub dl, 30h
+	mov esi, edx
+	mul ebx
+	add eax, esi
+	inc edi
+	loop top_of_loop
+	
+pop edx
+cmp edx, 1
+jne endOfStringToInt
+neg eax
+jmp end_of_string_to_int
+
+error: ;exit
+
+end_of_string_to_int: ;pop stuff
+	ret 8

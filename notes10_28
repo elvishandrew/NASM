@@ -1,0 +1,58 @@
+ File: notes10_28
+ Author: Andrew Plunk
+ Description: 
+ 2009-10-28
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;java
+x = x ^ mask	xor
+x = x & mask	and
+x = x | mask	or
+mask = ~mask 	1's complement (not)
+mask = -mask	2's complement
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;java
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;assembly
+xor dst, src
+and dst, src
+or dst, src
+not dst   ;1's complement
+test src1, src2 ;just sets the flags
+
+SHL - shift left
+SHR - shift right
+SAR - shift arithmatic right, brings in sign
+
+shl eax, 2
+eax = 0001001
+	<----2
+	0100100
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;assembly
+
+
+;int clearbit(int value, int bit_position)
+;clears the bit in value at position
+;if position > 31 or < 0 returns origional value
+
+clearbit: push ebp
+	mov ebp, esp
+	push ebx ;use as mask
+	push ecx
+	mov ecx, [ebp + 12] ; set position
+	mov eax, [ebp + 8] ;save return value incase we bail
+
+	cmp ecx, 31
+	jg done
+	test ecx, ecx
+	jl done
+	mov ebx, 1 ;;create a mask of 1
+top:	test ecx, ecx
+	je clear_now
+
+	shl ebx, ecx
+clear_now:
+	not ebx
+	and eax, ebx
+
+

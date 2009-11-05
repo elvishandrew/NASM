@@ -1,0 +1,10 @@
+$makefile for asignment 4
+a.out: mysubs.o main4.o
+<tab>	ld -m i386_elf mysubs.o main4.o
+mysubs.o: mysubs.asm
+<tab>	nasm -f elf mysubs.asm
+main4.o: main4.asm
+<tab>	nasm -f elf main4.asm
+
+clean:
+<tab> rm a.out mysubs.o mmain4.o

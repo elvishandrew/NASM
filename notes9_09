@@ -1,0 +1,72 @@
+WORKING WITH LOOPS
+
+
+addressing mode called register indirect ;register pointing to address
+
+section .bss ;(memory)
+my_string resb 70
+my_string_len resd 1
+
+edi=1000 ; address of my_string becomes 1001 after (inc edi)
+ecx=6
+
+
+mov eax, 1; assume input string is all digits
+mov edi, my_string 
+mov ecx, [my_string_len]
+text ecx, ecx ;check if ecx is zero
+jz do_nothing
+
+top_loop:  mov bl, [edi]   ;get a character from string put into bl
+cmp bl, 30h ; cmp bl, '0'      (30h is the hex for 0)
+jb not_a_digit 
+cmp bl, 39h
+ja not_a_digit
+inc edi; move to next char
+loop top_loop
+
+;after the loop instruction
+jp done_with_string ;do something then jmp done_with_string
+
+
+
+
+do_nothing:
+
+not_a_digit: xor eax, eax ;set eax to 0
+
+done_with_string:
+
+
+;;;;;;;;;;;DEBUGGER INSTRUCTIONS:::::::::::::::::;;;;;
+gdb a.out
+
+>break top_loop
+>run
+>info registers
+>cont ;continue
+>info registers ;shows in ascii
+> step ;just do one instruction
+
+
+
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;READ A STRING IN AND CONVERT IT TO A numeric integer;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+psudo code;;;;;;;;;;;;;;;;;;;;;;;;
+
+"147" => numeric code for +147
+
+;;;first read one char at a time
+;;;initially we start with 0
+;;;accumulator = 0
+;;;multiply accumulator by 10
+;;;0 * 10 = 0
+;;;add digit to accumulator now accumulator = 1
+take the one and convert it to the number 1
+31h = '1'
+00000001 = 1
+subtract 30h from 31h to get its numeric value

@@ -1,0 +1,74 @@
+Binary system = powers of 2. 
+hexadecimal = base 16 (2^4 = 16)
+
+oooo oooo b2
+o	o b16
+
+KNOW
+----
+0000
+0001
+0010
+0011
+
+0100
+0101
+0110
+0111
+
+1000
+1001
+1010
+1011
+1100
+1101
+1110
+1111
+
+Byte=8bits
+E8 = to answer this we must ask if this is signed or unsigned. this is an unsigned bit so it is automatically positive.
+1110 1000
+(128) (64) (32) (16) (8) (4) (2) (1)
+
+we use 2's complement to determine signed int.
+if leftmost number is 1 then it is negative.
+invert every bit
+
+0001 0111
+        1
+---------
+0001 1000
+(in 2's complement we must add a 1, and 1+ 1 = 0 carry 1).
+DO NOT THROW AWAY CARRY, CIRCLE THE CARRY AT THE LEFT END.
+
+0001 1000 = 24 so the answer is -24 because we started with a negative number.
+range of values that can be represented in 8 bits. unsigned
+ans: 0 to 255
+range of signed values in 8 bits
+ans: -128 to +127
+
+there is no -0 in 2's compliment
+
+Addresses are always UNSIGNED ints!!!!!!!
+0101
++0110
+----
+1011
+Status bits:
+1=N bit(negative)
+0=Z bit(zero)
+1=V bit(signed overrflow) ( does it make sence ex. two positives cannot make a negative)or two negatives that make a positive.
+1=C bit(carry bit) (what is the carry in the leftmost bit place)also called unsigned overflow
+
+
+PROGRAM FOR HOMEWORK!!!!
+there are directives and exicutable instructions
+
+
+
+
+
+
+
+
+
